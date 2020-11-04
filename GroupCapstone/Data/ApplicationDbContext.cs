@@ -10,7 +10,7 @@ namespace GroupCapstone.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<User> Users { get; set; } 
+        public DbSet<Participant> Participant { get; set; } 
 
         public DbSet<Event> Event { get; set; }
 
