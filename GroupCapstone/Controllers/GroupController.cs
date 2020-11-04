@@ -6,6 +6,7 @@ using GroupCapstone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PusherServer;
 
 namespace GroupCapstone.Controllers
 {
@@ -41,7 +42,7 @@ namespace GroupCapstone.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] NewGroupViewModel group)
+        public async Task<IActionResult> CreateAsync([FromBody] NewGroupViewModel group)
         {
             if (group == null || group.GroupName == "")
             {
@@ -68,6 +69,20 @@ namespace GroupCapstone.Controllers
                 );
                 _context.SaveChanges();
             }
+            var options = new PusherOptions
+            {
+                Cluster = API_KEYS.pusherAppCluster,
+                Encrypted = true
+            };
+            var pusher = new Pusher(
+                API_KEYS.pusherAppId,
+                API_KEYS.pusherAppKey,
+                API_KEYS.pusherAppSecret,
+            options);
+            var result = await pusher.TriggerAsync(
+                "group_chat", //channel name
+                "new_group", // event name
+            new { newGroup });
             return new ObjectResult(new { status = "success", data = newGroup });
         }
         public IActionResult Index()

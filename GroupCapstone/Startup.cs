@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using GroupCapstone.ActionFilters;
 using GroupCapstone.Models;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace GroupCapstone
 {
@@ -68,6 +70,12 @@ namespace GroupCapstone
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //    Path.Combine(env.ContentRootPath, "GroupCapstone")),
+            //    RequestPath = "/API_KEYS"
+            //});
 
             app.UseRouting();
 
@@ -77,8 +85,14 @@ namespace GroupCapstone
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "pusher_auth",
+                    pattern: "pusher/auth",
+                    defaults: new { controller = "Auth", action = "ChannelAuth" });
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }
