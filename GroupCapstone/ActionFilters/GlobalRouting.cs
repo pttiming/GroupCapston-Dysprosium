@@ -20,21 +20,20 @@ namespace GroupCapstone.ActionFilters
             var controller = context.RouteData.Values["controller"];
             if (controller.Equals("Home"))
             {
-                if (_claimsPrincipal.IsInRole("Customer"))
+                if (_claimsPrincipal.IsInRole("User"))
                 {
                     context.Result = new RedirectToActionResult("Index",
-                    "Customers", null);
+                    "Chat", null);
                 }
-                else if (_claimsPrincipal.IsInRole("Employee"))
-                {
-                    context.Result = new RedirectToActionResult("Index",
-                    "Employees", null);
-                }
+                //else if (_claimsPrincipal.IsInRole("Admin"))
+                //{
+                //    context.Result = new RedirectToActionResult("Index",
+                //    "Admins", null);
+                //}
             }
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {
         }
-
     }
 }

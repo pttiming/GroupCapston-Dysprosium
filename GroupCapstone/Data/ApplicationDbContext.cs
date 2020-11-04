@@ -22,11 +22,7 @@ namespace GroupCapstone.Data
             {
                 Name = "Admin",
                 NormalizedName = "ADMIN"
-            }
-            );
-            base.OnModelCreating(builder);
-            builder.Entity<IdentityRole>()
-            .HasData(
+            },
             new IdentityRole
             {
                 Name = "User",
@@ -35,6 +31,4 @@ namespace GroupCapstone.Data
             );
         }
     }
-
-    
 }
