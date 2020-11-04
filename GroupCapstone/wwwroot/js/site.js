@@ -5,8 +5,8 @@
 
 let currentGroupId = null;
 
-var pusher = new Pusher('PUSHER_APP_KEY', {
-    cluster: 'PUSHER_APP_CLUSTER',
+var pusher = new Pusher('ed1f63a5d01a8b4e629c', {
+    cluster: 'us2',
     encrypted: true
 });
 

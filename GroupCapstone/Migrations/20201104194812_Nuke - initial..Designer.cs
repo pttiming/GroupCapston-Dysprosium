@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GroupCapstone.Migrations
 {
     [DbContext(typeof(GroupChatContext))]
-    [Migration("20201104025939_Initial")]
-    partial class Initial
+    [Migration("20201104194812_Nuke - initial.")]
+    partial class Nukeinitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

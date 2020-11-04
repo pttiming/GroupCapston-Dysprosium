@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GroupCapstone.Models
 {
-    public class User
+    public class Participant
     {
         [Key]
         public int Id { get; set; }

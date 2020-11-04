@@ -2,7 +2,7 @@
 
 namespace GroupCapstone.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Nukeinitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

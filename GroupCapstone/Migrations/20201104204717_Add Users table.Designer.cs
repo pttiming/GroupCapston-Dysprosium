@@ -4,14 +4,16 @@ using GroupCapstone.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GroupCapstone.Migrations
 {
     [DbContext(typeof(GroupChatContext))]
-    partial class GroupChatContextModelSnapshot : ModelSnapshot
+    [Migration("20201104204717_Add Users table")]
+    partial class AddUserstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

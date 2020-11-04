@@ -16,5 +16,6 @@ namespace GroupCapstone.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<Message> Message { get; set; }
         public DbSet<UserGroup> UserGroup { get; set; }
+        public DbSet<Participant> User { get; set; }
     }
 }
