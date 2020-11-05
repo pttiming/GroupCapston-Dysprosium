@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Participant\**" />
+    <Content Remove="Views\Participant\**" />
+    <EmbeddedResource Remove="Views\Participant\**" />
+    <None Remove="Views\Participant\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
@@ -16,10 +23,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="PusherServer" Version="4.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Participant\" />
   </ItemGroup>
 
 </Project>
