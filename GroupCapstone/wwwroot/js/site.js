@@ -5,7 +5,7 @@
 
 var currentGroupId = null;
 
-var pusher = new Pusher('513728da7cbaebf48248', {
+var pusher = new Pusher('', {
     cluster: 'us2',
     encrypted: true
 });
