@@ -32,5 +32,26 @@ namespace GroupCapstone.Services
             return yelpBusinesses;
             ;
         }
+<<<<<<< HEAD
+=======
+
+        public async Task<YelpBusiness> GetBusiness(string businessId)
+        {
+            YelpBusiness yelpBusiness = new YelpBusiness() { Error = "API Error" };
+            string url = $"https://api.yelp.com/v3/businesses/{businessId}";
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", $"{API_KEYS.yelpApi}");
+            HttpResponseMessage response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonResult = await response.Content.ReadAsStringAsync();
+                yelpBusiness = JsonConvert.DeserializeObject<YelpBusiness>(jsonResult);
+                return yelpBusiness;
+            }
+            yelpBusiness = new YelpBusiness() { Error = "API Error" };
+            return yelpBusiness;
+            ;
+        }
+>>>>>>> 8e102d87b8494a8cfffe9712f1647cd46a2f1df7
     }
 }
