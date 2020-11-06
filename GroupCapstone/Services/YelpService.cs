@@ -1,4 +1,5 @@
 ﻿using GroupCapstone.Models;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace GroupCapstone.Services
         {
 
         }
+
+        [HttpGet]
         public async Task<YelpBusinesses> GetBusinesses(string searchlocation, string searchtype)
         {
             YelpBusinesses yelpBusinesses = new YelpBusinesses() { Error = "API Error" };
@@ -30,9 +33,9 @@ namespace GroupCapstone.Services
             }
             yelpBusinesses = new YelpBusinesses() { Error = "API Error" };
             return yelpBusinesses;
-            ;
         }
 
+        [HttpGet]
         public async Task<YelpBusiness> GetBusiness(string businessId)
         {
             YelpBusiness yelpBusiness = new YelpBusiness() { Error = "API Error" };

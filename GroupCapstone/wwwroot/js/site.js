@@ -111,3 +111,58 @@ function reloadGroup() {
         $("#groups").html(groups);
     });
 }
+
+$("#APISearchButton").click(function(event) {
+    var searchLocation = document.forms.yelpForm["location"].value;
+    var searchType = document.forms.yelpForm["type"].value;
+
+    //Yelp api call
+    $.ajax({
+        url: `https://localhost:44334/Home/GetBusinesses?location=${searchLocation}&type=${searchType}`,
+        type: 'GET',
+        dataType: 'json',
+        //data: {},
+        success: function (data, textStatus, jQqhr) {
+
+            console.log(data);
+            /*
+            // Clear results table
+            $("#apiResults").empty();
+
+            // Load table skeleton
+            $("#apiResults").html(
+            `<table>
+                <tr>
+                    <th style="width: 100px; text-align: center;">Result</th>
+                    <th style="width: 200px; text-align: center;">Location</th>
+                    <th style="width: 75px; text-align: center;">Rating</th>
+                    <th style="width: 75px; text-align: center;">Price</th>
+                    <th style="text-align: center; float: right">Action Buttons</th>
+                </tr>`
+            );
+
+            // Load API Results
+            $.each(data, function (key, value) {
+                $("#apiResults").append(
+                    `<tr style="border-top: 1px solid black; margin-top: 10px">
+                        <td>${value.name}</td>
+                        <td>${value.location.address1}</td>
+                        <td>${value.rating}</td>
+                        <td>${value.price}</td>
+                        <td>
+                            //Share to group will mirror send message functionality, except text will be the name of API search result/url
+                            <button type="submit" class="btn btn-secondary btn-sm" value="">Share to group</button>
+
+                    Toggle modal to view all details of that API result
+                            <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ViewDetails">View Details</button>
+                        </td>
+                    </tr>`
+                )
+            })*/
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        },
+    });
+    event.preventDefault();
+})

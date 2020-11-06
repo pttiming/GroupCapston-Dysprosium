@@ -32,9 +32,21 @@ namespace GroupCapstone.Controllers
             var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
 
             string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
-            var singleResult = await _yelp.GetBusiness(yelpId);
+            //var singleResult = await _yelp.GetBusiness(yelpId);
 
             return View();
+        }
+
+        public Task<YelpBusiness> GetBusiness(string businessId)
+        {
+            var yelpResult = _yelp.GetBusiness(businessId);
+            return yelpResult;
+        }
+
+        public string GetBusinesses(string location, string type)
+        {
+            var yelpResult = JsonConvert.SerializeObject(_yelp.GetBusinesses(location, type));
+            return yelpResult;
         }
 
         public IActionResult Privacy()

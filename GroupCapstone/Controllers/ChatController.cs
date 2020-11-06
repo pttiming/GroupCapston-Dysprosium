@@ -14,6 +14,7 @@ namespace GroupCapstone.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly GroupChatContext _GroupContext;
+
         public ChatController(
           UserManager<IdentityUser> userManager,
           GroupChatContext context
