@@ -32,12 +32,11 @@ namespace GroupCapstone.Services
             return yelpBusinesses;
             ;
         }
-<<<<<<< HEAD
-=======
 
-        public async Task<YelpBusiness> GetBusiness(string businessId)
+        public async Task<YelpBusiness> GetBusiness()
         {
             YelpBusiness yelpBusiness = new YelpBusiness() { Error = "API Error" };
+            string businessId = "R-r0sJ-7ntM9ooj7vTK2eg";
             string url = $"https://api.yelp.com/v3/businesses/{businessId}";
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", $"{API_KEYS.yelpApi}");
@@ -52,6 +51,5 @@ namespace GroupCapstone.Services
             return yelpBusiness;
             ;
         }
->>>>>>> 8e102d87b8494a8cfffe9712f1647cd46a2f1df7
     }
 }

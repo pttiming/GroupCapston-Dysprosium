@@ -11,6 +11,6 @@ namespace GroupCapstone.Models
         public int ID { get; set; }
         public string GroupName { get; set; }
 
-        [ForeignKey("Event")]
+        //[ForeignKey("Event")]
     }
 }
