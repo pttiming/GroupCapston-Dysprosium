@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <title>DotNet Group Chat</title>
+    <style type="text/css">
+        .group {
+            padding: 13px;
+            border-radius: 12px;
+            background: rgb(57, 125, 192);
+            margin: 5px 0px;
+            font-weight: bolder;
+            color: black;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        .chat_body {
+            height: 513px;
+            overflow: auto;
+        }
+
+        .less_padding {
+            padding: 2px;
+        }
+
+        .chat_message {
+            padding: 13px;
+            border-radius: 12px;
+            width: 50%;
+            background: #85C1E9;
+            margin: 6px 4px;
+        }
+
+        .chat_main {
+            background-color: #957bbe;
+            height: 520;
+            padding: 0px;
+        }
+
+        .group_main {
+            background-color: #85C1E9;
+        }
+
+    </style>
+</head>
+<body>
+    <h3 class="text-center">Welcome</h3>
+    <div class="container" style="background-color: gray;">
+        <div class="row">
+            <div class="col-md-3 less_padding">
+                <div class="col group_main">
+                    <div class="text-center"> Groups </div>
+
+                    <!--Groups panel-->
+                    <div class="row" style="height: 280px; overflow: auto;" id="groups">
+                        <input type="hidden" value="" id="currentGroup">
+                            <div class="group" data-group_id="@group.GroupId">Group #1</div>
+                            <div class="group" data-group_id="@group.GroupId">Group #2</div>
+                            <div class="group" data-group_id="@group.GroupId">Group #3</div>
+
+                        <!--@foreach (var group in (dynamic)ViewData["UserGroups"])
+                        {
+                            <div class="group" data-group_id="@group.GroupId"> @group.GroupName </div>
+                        }-->
+
+                        <!-- List groups-->
+                    </div>
+
+                    <!--Buttons-->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#SearchGroups">Search Groups</button>
+                        <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#CreateNewGroup">Add Group</button>
+                    </div>
+                </div>
+
+                <!--Blank space between Groups and Events-->
+                <div style="padding-top: 5px;"></div>
+
+                <!--Events panel-->
+                <div class="col group_main" >
+                    <div class="text-center"> Events </div>
+                    <div class="row" style="height: 190px; overflow: auto;" id="groups">
+                        <input type="hidden" value="" id="currentGroup">
+                            <div class="group" data-group_id="@group.GroupId">Event #1</div>
+                            <div class="group" data-group_id="@group.GroupId">Event #2</div>
+
+                        <!--Add functionality to grab all events in ViewData-->
+
+                        <!--@foreach (var group in (dynamic)ViewData["UserGroups"])
+                        {
+                            <div class="group" data-group_id="@group.GroupId"> @group.GroupName </div>
+                        }-->
+                        <!-- List groups-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 less_padding">
+                <div class="col-md-12 chat_main">
+                    <div class="chat_body">
+                        <!-- <div class="chat_message float-right">Hello, </div> -->
+                    </div>
+                    <div class="row container" style="margin-left: 3px;">
+                        <!--Message input box-->
+                        <div class="col-md-9 col-sm-9 less_padding">
+                            <textarea class="form-control" rows="1" id="Message"></textarea>
+                        </div>
+                        <!--Send message button-->
+                        <div class="col-md-3 col-sm-3 less_padding">
+                            <button type="submit" class="btn btn-primary" style=" position: absolute;" id="SendMessage">Send Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--API Interface-->
+    <div class="container">
+        <div class="row">
+
+            <!--Search Box-->
+            <div class="col-md-3">
+                <h3>Search Yelp:</h3>
+                <input type="text" placeholder="Zip code"></input>
+                <input type="text" placeholder="Search by type"></input>
+                <button type="submit" class="btn btn-primary">Search!</button>
+            </div>
+
+            <!--Results Table-->
+            <div class="col-md-9" id="apiResults">
+                <table>
+                    <!--Populate with table of API results-->
+                    <tr>
+                        <th style="width: 100px; text-align: center;">Result</th>
+                        <th style="width: 200px; text-align: center;">Location</th>
+                        <th style="width: 75px; text-align: center;">Rating</th>
+                        <th style="width: 75px; text-align: center;">Price</th>
+                        <th style="text-align: center; float: right">Action Buttons</th>
+                    </tr>
+                    <tr style="border-top: 1px solid black; margin-top: 10px">
+                        <td>Result #1</td>
+                        <td>Street address</td>
+                        <td>#1-5</td>
+                        <td>$-$$$</td>
+                        <td>
+                            <!--Share to group will mirror send message functionality, except text will be the name of API search result/url-->
+                            <button type="submit" class="btn btn-secondary btn-sm">Share to group</button>
+
+                            <!--Toggle modal to view all details of that API result-->
+                            <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ViewDetails">View Details</button>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid black; margin-top: 10px">
+                        <td>Result #2</td>
+                        <td>Street address</td>
+                        <td>#1-5</td>
+                        <td>$-$$$</td>
+                        <td>
+                            <!--Share to group will mirror send message functionality, except text will be the name of API search result/url-->
+                            <button type="submit" class="btn btn-secondary btn-sm">Share to group</button>
+
+                            <!--Toggle modal to view all details of that API result-->
+                            <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ViewDetails">View Details</button>
+                        </td>
+                    </tr>
+                    <tr style="border-top: 1px solid black; margin-top: 10px">
+                        <td>Result #3</td>
+                        <td>Street address</td>
+                        <td>#1-5</td>
+                        <td>$-$$$</td>
+                        <td>
+                            <!--Share to group will mirror send message functionality, except text will be the name of API search result/url-->
+                            <button type="submit" class="btn btn-secondary btn-sm">Share to group</button>
+
+                            <!--Toggle modal to view all details of that API result-->
+                            <button type="submit" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ViewDetails">View Details</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+    <!--View API Result Details-->
+    <div class="modal fade" id="ViewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">API Result: Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="SearchGroupForm">
+                        <ol>
+                            <li>Picture</li>
+                            <li>Address - Small Google Map</li>
+                            <li>Price: $-$$$</li>
+                            <li>Rating: 1-5</li>
+                        </ol>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="CreateNewGroupButton">Share To Group</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Search/Join Groups-->
+    <div class="modal fade" id="SearchGroups" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Search Groups</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="SearchGroupForm">
+                        <h2>Populate all groups here</h2>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="CreateNewGroupButton">Join Group</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Add New Group-->
+    <div class="modal fade" id="CreateNewGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add New Group</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="CreateGroupForm">
+                        <div class="form-group">
+                            <label for="GroupName">Group Name</label>
+                            <input type="text" class="form-control" name="GroupName" id="GroupName" aria-describedby="emailHelp" placeholder="Group Name">
+                        </div>
+                        <label for="User">Add Users <br></label> <br>
+                        <div class="row">
+                            <!-- List users here -->
+                            <!--@foreach (var user in (dynamic)ViewData["Users"])
+                            {
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="checkbox" value="@user.UserName" name="UserName[]">
+                                        <label class="form-check-label" for="Users">@user.UserName</label>
+                                    </div>
+                                </div>
+                            }-->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="CreateNewGroupButton">Create Group</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="js/site.js" asp-append-version="true"></script>
+</body>
+</html>

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GroupCapstone.Models;
+using GroupCapstone.Services;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace GroupCapstone.Controllers
 {
@@ -13,13 +17,20 @@ namespace GroupCapstone.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public YelpService _yelp;
+
+        public HomeController(ILogger<HomeController> logger, YelpService yelp)
         {
             _logger = logger;
+            _yelp = yelp;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            string searchlocation = "53005";
+            string searchtype = "pizza";
+            var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
+
             return View();
         }
 

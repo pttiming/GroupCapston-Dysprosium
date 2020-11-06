@@ -3,9 +3,9 @@
 
 // Write your JavaScript code.
 
-let currentGroupId = null;
+var currentGroupId = null;
 
-var pusher = new Pusher('ed1f63a5d01a8b4e629c', {
+var pusher = new Pusher('', {
     cluster: 'us2',
     encrypted: true
 });
@@ -80,9 +80,9 @@ $("#SendMessage").click(function () {
         url: "/api/message",
         data: JSON.stringify({
             AddedBy: $("#UserName").val(),
-            GroupId: $("#currentGroup").val(),
+            GroupId: parseInt(currentGroupId),//$("#currentGroup").val(),
             message: $("#Message").val(),
-            socketId: pusher.connection.socket_id
+            SocketId: pusher.connection.socket_id
         }),
         success: (data) => {
             $(".chat_body").append(`<div class="row chat_message float-right"><b>`

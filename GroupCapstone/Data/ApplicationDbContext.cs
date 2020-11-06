@@ -10,7 +10,7 @@ namespace GroupCapstone.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<User> Users { get; set; } 
+        public DbSet<Participant> Participant { get; set; } 
 
         public DbSet<Event> Event { get; set; }
 
@@ -26,13 +26,8 @@ namespace GroupCapstone.Data
             .HasData(
             new IdentityRole
             {
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            },
-            new IdentityRole
-            {
-                Name = "User",
-                NormalizedName = "USER"
+                Name = "Participant",
+                NormalizedName = "PARTICIPANT"
             }
             );
         }

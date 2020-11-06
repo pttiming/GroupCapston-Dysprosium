@@ -18,6 +18,7 @@ using GroupCapstone.ActionFilters;
 using GroupCapstone.Models;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using GroupCapstone.Services;
 
 namespace GroupCapstone
 {
@@ -52,6 +53,7 @@ namespace GroupCapstone
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<YelpService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
