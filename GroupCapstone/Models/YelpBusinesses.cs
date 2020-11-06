@@ -30,6 +30,7 @@ namespace GroupCapstone.Models
         public string phone { get; set; }
         public string display_phone { get; set; }
         public float distance { get; set; }
+        public string Error { get; set; }
     }
 
     public class Coordinates

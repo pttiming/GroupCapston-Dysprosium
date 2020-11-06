@@ -31,6 +31,9 @@ namespace GroupCapstone.Controllers
             string searchtype = "pizza";
             var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
 
+            string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
+            var singleResult = await _yelp.GetBusiness(yelpId);
+
             return View();
         }
 
