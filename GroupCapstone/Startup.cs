@@ -54,10 +54,6 @@ namespace GroupCapstone
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddScoped<YelpService>();
-<<<<<<< HEAD
-=======
-            services.AddScoped<GoogleService>();
->>>>>>> 8e102d87b8494a8cfffe9712f1647cd46a2f1df7
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
