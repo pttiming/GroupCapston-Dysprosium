@@ -35,10 +35,12 @@ namespace GroupCapstone.Services
             return yelpBusinesses;
         }
 
+
         [HttpGet]
         public async Task<YelpBusiness> GetBusiness(string businessId)
         {
             YelpBusiness yelpBusiness = new YelpBusiness() { Error = "API Error" };
+            //string businessId = "R-r0sJ-7ntM9ooj7vTK2eg";
             string url = $"https://api.yelp.com/v3/businesses/{businessId}";
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", $"{API_KEYS.yelpApi}");
