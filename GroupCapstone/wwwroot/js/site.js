@@ -5,7 +5,9 @@
 
 var currentGroupId = null;
 
-var pusher = new Pusher('', {
+let pusherKey = sessionStorage.getItem('pusher')
+
+var pusher = new Pusher(pusherKey, {
     cluster: 'us2',
     encrypted: true
 });
