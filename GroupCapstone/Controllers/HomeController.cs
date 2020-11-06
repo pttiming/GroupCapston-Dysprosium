@@ -25,18 +25,8 @@ namespace GroupCapstone.Controllers
             _yelp = yelp;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            string searchlocation = "53005";
-            string searchtype = "pizza";
-            var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
-
-<<<<<<< HEAD
-=======
-            string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
-            var singleResult = await _yelp.GetBusiness(yelpId);
-
->>>>>>> 8e102d87b8494a8cfffe9712f1647cd46a2f1df7
             return View();
         }
 
