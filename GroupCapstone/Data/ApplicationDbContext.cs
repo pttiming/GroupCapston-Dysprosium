@@ -26,13 +26,8 @@ namespace GroupCapstone.Data
             .HasData(
             new IdentityRole
             {
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            },
-            new IdentityRole
-            {
-                Name = "User",
-                NormalizedName = "USER"
+                Name = "Participant",
+                NormalizedName = "PARTICIPANT"
             }
             );
         }

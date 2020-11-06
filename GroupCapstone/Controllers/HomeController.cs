@@ -27,7 +27,6 @@ namespace GroupCapstone.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
 

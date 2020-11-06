@@ -32,6 +32,8 @@ namespace GroupCapstone.Services
             return yelpBusinesses;
             ;
         }
+<<<<<<< HEAD
+=======
 
         public async Task<YelpBusiness> GetBusiness(string businessId)
         {
@@ -50,5 +52,6 @@ namespace GroupCapstone.Services
             return yelpBusiness;
             ;
         }
+>>>>>>> 8e102d87b8494a8cfffe9712f1647cd46a2f1df7
     }
 }
