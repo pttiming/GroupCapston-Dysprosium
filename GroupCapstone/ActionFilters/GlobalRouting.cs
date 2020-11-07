@@ -20,7 +20,7 @@ namespace GroupCapstone.ActionFilters
             var controller = context.RouteData.Values["controller"];
             if (controller.Equals("Home"))
             {
-                if (_claimsPrincipal.IsInRole("User"))
+                if (_claimsPrincipal.IsInRole("Participant"))
                 {
                     context.Result = new RedirectToActionResult("Index",
                     "Chat", null);
