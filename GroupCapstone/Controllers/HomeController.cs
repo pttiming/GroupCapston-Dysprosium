@@ -27,11 +27,11 @@ namespace GroupCapstone.Controllers
 
         public IActionResult Index()
         {
-            string searchlocation = "53005";
-            string searchtype = "pizza";
+            //string searchlocation = "53005";
+            //string searchtype = "pizza";
             //var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
 
-            string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
+            //string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
             //var singleResult = await _yelp.GetBusiness(yelpId);
             return View();
         }
@@ -42,9 +42,9 @@ namespace GroupCapstone.Controllers
             return yelpResult;
         }
 
-        public string GetBusinesses(string location, string type)
+        public Task<YelpBusinesses> GetBusinesses(string location, string type)
         {
-            var yelpResult = JsonConvert.SerializeObject(_yelp.GetBusinesses(location, type));
+            var yelpResult = _yelp.GetBusinesses(location, type);
             return yelpResult;
         }
 

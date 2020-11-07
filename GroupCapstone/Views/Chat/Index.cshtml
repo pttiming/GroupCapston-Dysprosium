@@ -89,7 +89,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <form name="yelpForm">
                     <h3>Search Yelp:</h3>
                     <input type="text" name="location" placeholder="ZipCode">
@@ -97,22 +97,8 @@
                     <button id="APISearchButton" type="button">Search!</button>
                 </form>
             </div>
-            <div class="col-md-8" id="apiResults">
-                <table>
-                    <!--Populate with table of API results-->
-                    <tr>
-                        <th>API results</th>
-                        <th>Result location?</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr>
-                        <td>Restaurant name</td>
-                        <td>Restaurant address</td>
-                        <td>
-                            <!--Share to group will mirror send message functionality, except text will be the name of API search result-->
-                            <button type="submit">Share to group</button>
-                        </td>
-                    </tr>
+            <div class="col-md-9">
+                <table id="apiResults">
                 </table>
             </div>
         </div>

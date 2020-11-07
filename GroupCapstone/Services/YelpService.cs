@@ -53,7 +53,6 @@ namespace GroupCapstone.Services
             }
             yelpBusiness = new YelpBusiness() { Error = "API Error" };
             return yelpBusiness;
-            ;
         }
     }
 }

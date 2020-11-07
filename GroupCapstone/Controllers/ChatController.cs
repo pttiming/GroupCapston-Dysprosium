@@ -16,14 +16,9 @@ namespace GroupCapstone.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly GroupChatContext _GroupContext;
-
         public ApplicationDbContext _db;
 
-        public ChatController(
-          UserManager<IdentityUser> userManager,
-          GroupChatContext context,
-          ApplicationDbContext db
-          )
+        public ChatController(UserManager<IdentityUser> userManager, GroupChatContext context, ApplicationDbContext db)
         {
             _userManager = userManager;
             _GroupContext = context;
@@ -33,19 +28,16 @@ namespace GroupCapstone.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var participantId = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-
-
             var groups = _GroupContext.UserGroup
-                        .Where(gp => gp.UserName == _userManager.GetUserName(User))
-                        .Join(_GroupContext.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
-                                new UserGroupViewModel
-                                {
-                                    UserName = ug.UserName,
-                                    GroupId = g.ID,
-                                    GroupName = g.GroupName
-                                })
-                        .ToList();
-
+                .Where(gp => gp.UserName == _userManager.GetUserName(User))
+                .Join(_GroupContext.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
+                        new UserGroupViewModel
+                        {
+                            UserName = ug.UserName,
+                            GroupId = g.ID,
+                            GroupName = g.GroupName
+                        })
+                .ToList();
             ViewData["UserGroups"] = groups;
 
             // get all users      
