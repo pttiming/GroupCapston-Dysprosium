@@ -152,7 +152,7 @@ $("#APISearchButton").click(function (event) {
                         <td>${value.rating}</td>
                         <td>${value.price}</td>
                         <td>
-                            <button type="button" class="btn btn-secondary btn-sm">Share to group</button>
+                            <button type="button" class="btn btn-secondary btn-sm"id="ShareToGroup" onclick="shareToGroup('${value.url}')">Share To Group</button>
                             <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#SingleBusinessDetails" onclick="yelpSingleBusiness('${value.id}', event)">View Details</button>
                         </td>
                     </tr>`
@@ -174,6 +174,7 @@ function yelpSingleBusiness(businessId, event) {
         type: 'GET',
         dataType: 'json',
         success: function (data, textStatus, jQqhr) {
+            console.log(data);
             $("#SingleBusinessDetails .modal-dialog .modal-content .modal-header .modal-title").html(
                 `${data.name}`
             );
@@ -214,7 +215,7 @@ function yelpSingleBusiness(businessId, event) {
             )
             $("#SingleBusinessDetails .modal-dialog .modal-content .modal-footer").html(
                 `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="CreateNewGroupButton">Share To Group</button>`
+                <button type="button" class="btn btn-primary" id="ShareToGroup" onclick="shareToGroup('${data.url}')">Share To Group</button>`
             )
         },
         error: function (jqXhr, textStatus, errorThrown) {
@@ -222,4 +223,31 @@ function yelpSingleBusiness(businessId, event) {
         },
     });
     event.preventDefault();
+}
+
+function shareToGroup(url) {
+    if (currentGroupId == null) {
+        alert("Please select a Group to send the message to!")
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/api/message",
+            data: JSON.stringify({
+                AddedBy: $("#UserName").val(),
+                GroupId: parseInt(currentGroupId),//$("#currentGroup").val(),
+                message: `<a href="${url}">Check out this restaurant I found on Yelp!</a>`,
+                SocketId: pusher.connection.socket_id
+            }),
+            success: (data) => {
+                $(".chat_body").append(`<div class="row chat_message float-right"><b>`
+                    + data.data.addedBy + `: </b>` + $("#Message").val() + `</div>`
+                );
+
+                $("#Message").val('');
+            },
+            dataType: 'json',
+            contentType: 'application/json'
+        });
+    }
 }
