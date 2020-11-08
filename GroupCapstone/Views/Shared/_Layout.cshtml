@@ -25,10 +25,10 @@
                         @if (User.IsInRole("Participant"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Groups">Privacy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Group" asp-action="Details">Groups</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Events">Privacy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Details">Events</a>
                             </li>}
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
