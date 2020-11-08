@@ -27,7 +27,7 @@
 
         .chat_body {
             height: 520px;
-            overflow: scroll;
+            overflow: auto;
         }
 
         .less_padding {
@@ -55,18 +55,17 @@
     </style>
 </head>
 <body>
-    <h3 class="text-center">Welcome</h3>
+    <h3 class="text-center">Welcome to the GroupChat</h3>
     <div class="container" style="background-color: grey;">
         <div class="row">
-            <div class="col-md-2 less_padding">
+            <div class="col-md-12 less_padding">
                 <div class="col group_main">
-                    <div class="text-center"> Groups </div>
-                    <div class="row" style="height: 500px;overflow: scroll;" id="groups">
+                    <div class="text-center"><h4>My Groups</h4>  </div>
+                    <div class="row" style="overflow: auto;" id="groups">
                         <input type="hidden" value="" id="currentGroup">
                         @foreach (var group in (dynamic)ViewData["UserGroups"])
                         {
-                            <div class="group" data-group_id="@group.GroupId"> @group.GroupName </div>
-                        }
+            <div class="group" data-group_id="@group.GroupId"> @group.GroupName </div>}
                         <!-- List groups-->
                     </div>
                     <div class="text-center">
@@ -74,17 +73,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 less_padding">
+        </div>
+        <div class="row">
+            <div class="col-md-12 less_padding">
                 <div class="col-md-12 chat_main">
                     <div class="chat_body">
                         <!-- <div class="chat_message float-right">Hello, </div> -->
                     </div>
-                    <div class="row container" style="margin-left: 3px;">
+            </div>
+            <div class="row">
+                    <div class="row container" style="margin-left: 3px; height: auto;">
                         <div class="col-md-9 col-sm-9 less_padding">
                             <textarea class="form-control" rows="1" id="Message"></textarea>
                         </div>
                         <div class="col-md-3 col-sm-3 less_padding">
-                            <button type="submit" class="btn btn-primary" style=" position: absolute;" id="SendMessage">Send Message</button>
+                            <button type="submit" class="btn btn-primary" style=" position: relative;" id="SendMessage">Send Message</button>
                         </div>
                     </div>
                 </div>
