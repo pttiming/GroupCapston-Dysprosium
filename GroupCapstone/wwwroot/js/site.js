@@ -129,8 +129,6 @@ $("#APISearchButton").click(function(event) {
         dataType: 'json',
         success: function (data, textStatus, jQqhr) {
 
-            console.log(data);
-            
             // Clear results table
             $("#apiResults").empty();
 
@@ -154,8 +152,8 @@ $("#APISearchButton").click(function(event) {
                         <td>${value.rating}</td>
                         <td>${value.price}</td>
                         <td>
-                            <button type="button" class="btn btn-secondary btn-sm" value="">Share to group</button>
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#ViewDetails">View Details</button>
+                            <button type="button" class="btn btn-secondary btn-sm">Share to group</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#SingleBusinessDetails" onclick="yelpSingleBusiness('${value.id}', event)">View Details</button>
                         </td>
                     </tr>`
                 )
@@ -167,3 +165,64 @@ $("#APISearchButton").click(function(event) {
     });
     event.preventDefault();
 })
+
+function yelpSingleBusiness(businessId, event) {
+
+    //Yelp api call
+    $.ajax({
+        url: `https://localhost:44334/Home/GetBusiness?businessId=${businessId}`,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data, textStatus, jQqhr) {
+            $("#SingleBusinessDetails .modal-dialog .modal-content .modal-header .modal-title").html(
+                `${ data.name }`
+            );
+            $("#SingleBusinessDetails .modal-dialog .modal-content .modal-body").html(
+                `<div class="row">
+                    <div class="col-sm-4">
+                        <image src="${data.image_url}" alt="${data.name}" style="width: 100%"></image>
+                    </div>
+                    <div class="col-sm-8">
+                        <table>
+                            <tr valign="top">
+                                <td style="width: 100px;">Address:</td>
+                                <td>
+                                    ${data.location.display_address[0]}<br>
+                                        ${data.location.display_address[1]}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td>${data.display_phone}</td>
+                                </tr>
+                                <tr>
+                                    <td>Price:</td>
+                                    <td>${data.price}</td>
+                                </tr>
+                                <tr>
+                                    <td># Ratings:</td>
+                                    <td>${data.review_count}</td>
+                                </tr>
+                                <tr>
+                                    <td>Avg. Rating:</td>
+                                    <td>${data.rating}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2>Insert Google Map Here</h2>
+                    </div>
+                </div>`
+            )
+            $("#SingleBusinessDetails .modal-dialog .modal-content .modal-footer").html(
+                `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="CreateNewGroupButton">Share To Group</button>`
+            )
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            console.log(errorThrown);
+        },
+    });
+    event.preventDefault();
+}
