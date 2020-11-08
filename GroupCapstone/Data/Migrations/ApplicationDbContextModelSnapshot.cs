@@ -26,41 +26,14 @@ namespace GroupCapstone.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Address2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Latitude")
-                        .HasColumnType("decimal(10, 8)");
-
-                    b.Property<decimal>("Longitude")
-                        .HasColumnType("decimal(11, 8)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ZipCode")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -80,17 +53,11 @@ namespace GroupCapstone.Data.Migrations
                     b.Property<string>("Address2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AddressLabel")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("EventId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -114,8 +81,6 @@ namespace GroupCapstone.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EventId");
 
                     b.HasIndex("IdentityUserId");
 
@@ -151,10 +116,17 @@ namespace GroupCapstone.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8bb184cd-c9ce-44b7-8ea3-502902b2b601",
-                            ConcurrencyStamp = "a62dfa82-d34d-4de0-a402-b5f0772e56d6",
-                            Name = "Participant",
-                            NormalizedName = "PARTICIPANT"
+                            Id = "ef592e32-1b59-4565-8146-13eec0727bef",
+                            ConcurrencyStamp = "f1415db5-0be6-4edc-823b-5f84c4fb9e61",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "d279eaab-c2a7-4fae-8067-b1d0f51c678f",
+                            ConcurrencyStamp = "18ef9548-a8bc-439e-88fa-7b3bcca9d415",
+                            Name = "User",
+                            NormalizedName = "USER"
                         });
                 });
 
@@ -329,10 +301,6 @@ namespace GroupCapstone.Data.Migrations
 
             modelBuilder.Entity("GroupCapstone.Models.Participant", b =>
                 {
-                    b.HasOne("GroupCapstone.Models.Event", null)
-                        .WithMany("Attendees")
-                        .HasForeignKey("EventId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
                         .HasForeignKey("IdentityUserId");
