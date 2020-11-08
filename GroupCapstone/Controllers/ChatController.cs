@@ -27,7 +27,11 @@ namespace GroupCapstone.Controllers
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var participantId = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var participant = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            if (participant == null)
+            {
+                return RedirectToAction("Create", "Participants");
+            }
             var groups = _GroupContext.UserGroup
                 .Where(gp => gp.UserName == _userManager.GetUserName(User))
                 .Join(_GroupContext.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
