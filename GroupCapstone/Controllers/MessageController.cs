@@ -33,6 +33,7 @@ namespace GroupCapstone.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] MessageViewModel message)
         {
+            
             Message new_message = new Message { AddedBy = _userManager.GetUserName(User), message = message.message, GroupId = message.GroupId };
 
             _context.Message.Add(new_message);
@@ -57,6 +58,7 @@ namespace GroupCapstone.Controllers
             new TriggerOptions() { SocketId = message.SocketId });
 
             return new ObjectResult(new { status = "success", data = new_message });
+            
         }
     }
 }

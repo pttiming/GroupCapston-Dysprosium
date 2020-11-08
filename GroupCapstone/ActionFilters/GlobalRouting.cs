@@ -25,11 +25,7 @@ namespace GroupCapstone.ActionFilters
                     context.Result = new RedirectToActionResult("Index",
                     "Chat", null);
                 }
-                //else if (_claimsPrincipal.IsInRole("Admin"))
-                //{
-                //    context.Result = new RedirectToActionResult("Index",
-                //    "Admins", null);
-                //}
+                
             }
         }
         public void OnActionExecuted(ActionExecutedContext context)

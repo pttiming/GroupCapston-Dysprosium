@@ -78,25 +78,30 @@ $("#CreateNewGroupButton").click(function () {
 
 // Add functionality to send message button
 $("#SendMessage").click(function () {
-    $.ajax({
-        type: "POST",
-        url: "/api/message",
-        data: JSON.stringify({
-            AddedBy: $("#UserName").val(),
-            GroupId: parseInt(currentGroupId),//$("#currentGroup").val(),
-            message: $("#Message").val(),
-            SocketId: pusher.connection.socket_id
-        }),
-        success: (data) => {
-            $(".chat_body").append(`<div class="row chat_message float-right"><b>`
-                + data.data.addedBy + `: </b>` + $("#Message").val() + `</div>`
-            );
+    if (currentGroupId == null) {
+        alert("Please select a Group to send the message to!")
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "/api/message",
+            data: JSON.stringify({
+                AddedBy: $("#UserName").val(),
+                GroupId: parseInt(currentGroupId),//$("#currentGroup").val(),
+                message: $("#Message").val(),
+                SocketId: pusher.connection.socket_id
+            }),
+            success: (data) => {
+                $(".chat_body").append(`<div class="row chat_message float-right"><b>`
+                    + data.data.addedBy + `: </b>` + $("#Message").val() + `</div>`
+                );
 
-            $("#Message").val('');
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
+                $("#Message").val('');
+            },
+            dataType: 'json',
+            contentType: 'application/json'
+        });
+    }
 });
 
 function reloadGroup() {
