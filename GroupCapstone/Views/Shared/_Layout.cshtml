@@ -24,13 +24,13 @@
                         </li>
                         @if (User.IsInRole("Participant"))
                         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Group" asp-action="Details">Groups</a>
-            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Group" asp-action="Details">Groups</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Details">Events</a>
                             </li>
-}
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
@@ -54,6 +54,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@API_KEYS.googleMapsApi&callback=initMap&libraries=&v=weekly" defer></script>
     <script src="~/js/key.js" asp-append-version="true"></script>
     <script>
         setKeys("@API_KEYS.pusherAppKey");

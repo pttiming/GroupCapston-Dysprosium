@@ -44,37 +44,37 @@ $("#CreateNewGroupButton").click(function () {
 });
 
 // When a user clicks on a group, Load messages for that particular group.
-    $("#groups").on("click", ".group", function(){
-        let group_id = $(this).attr("data-group_id");
+$("#groups").on("click", ".group", function () {
+    let group_id = $(this).attr("data-group_id");
 
-        $('.group').css({"border-style": "none", cursor:"pointer"});
-        $(this).css({"border-style": "inset", cursor:"default"});
+    $('.group').css({ "border-style": "none", cursor: "pointer" });
+    $(this).css({ "border-style": "inset", cursor: "default" });
 
-        $("#currentGroup").val(group_id); // update the current group_id to a html form...
-        currentGroupId =  group_id;
+    $("#currentGroup").val(group_id); // update the current group_id to a html form...
+    currentGroupId = group_id;
 
-        // get all messages for the group and populate it...
-        $.get( "/api/message/"+group_id, function( data ) {
-            let message = "";
+    // get all messages for the group and populate it...
+    $.get("/api/message/" + group_id, function (data) {
+        let message = "";
 
-            data.forEach(function(data){
-                    let position = ( data.addedBy == $("#UserName").val() ) ? " float-right" : "";
-                    message += `<div class="row chat_message` + position +`"><b>`+ data.addedBy +`: </b>`+ data.message +` </div>`;
-            });
-
-            $(".chat_body").html(message);
+        data.forEach(function (data) {
+            let position = (data.addedBy == $("#UserName").val()) ? " float-right" : "";
+            message += `<div class="row chat_message` + position + `"><b>` + data.addedBy + `: </b>` + data.message + ` </div>`;
         });
-        if( !pusher.channel('private-'+group_id) ){ // check the user have subscribed to the channel before.
-            let group_channel = pusher.subscribe('private-'+group_id);
 
-            group_channel.bind('new_message', function(data) { 
-                 if( currentGroupId == data.new_message.GroupId){
-
-                      $(".chat_body").append(`<div class="row chat_message"><b>`+ data.new_message.AddedBy +`: </b>`+ data.new_message.message +` </div>`);
-                 }
-              });  
-        }
+        $(".chat_body").html(message);
     });
+    if (!pusher.channel('private-' + group_id)) { // check the user have subscribed to the channel before.
+        let group_channel = pusher.subscribe('private-' + group_id);
+
+        group_channel.bind('new_message', function (data) {
+            if (currentGroupId == data.new_message.GroupId) {
+
+                $(".chat_body").append(`<div class="row chat_message"><b>` + data.new_message.AddedBy + `: </b>` + data.new_message.message + ` </div>`);
+            }
+        });
+    }
+});
 
 // Add functionality to send message button
 $("#SendMessage").click(function () {
@@ -118,7 +118,7 @@ function reloadGroup() {
     });
 }
 
-$("#APISearchButton").click(function(event) {
+$("#APISearchButton").click(function (event) {
     var searchLocation = document.forms.yelpForm["location"].value;
     var searchType = document.forms.yelpForm["type"].value;
 
@@ -175,14 +175,14 @@ function yelpSingleBusiness(businessId, event) {
         dataType: 'json',
         success: function (data, textStatus, jQqhr) {
             $("#SingleBusinessDetails .modal-dialog .modal-content .modal-header .modal-title").html(
-                `${ data.name }`
+                `${data.name}`
             );
             $("#SingleBusinessDetails .modal-dialog .modal-content .modal-body").html(
                 `<div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <image src="${data.image_url}" alt="${data.name}" style="width: 100%"></image>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <table>
                             <tr valign="top">
                                 <td style="width: 100px;">Address:</td>
@@ -209,9 +209,6 @@ function yelpSingleBusiness(businessId, event) {
                                 </tr>
                             </table>
                         </div>
-                    </div>
-                    <div class="row">
-                        <h2>Insert Google Map Here</h2>
                     </div>
                 </div>`
             )
