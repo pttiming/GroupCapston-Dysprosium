@@ -10,6 +10,8 @@ using GroupCapstone.Services;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Security.Claims;
+using GroupCapstone.Data;
 
 namespace GroupCapstone.Controllers
 {
@@ -19,21 +21,24 @@ namespace GroupCapstone.Controllers
 
         public YelpService _yelp;
 
-        public HomeController(ILogger<HomeController> logger, YelpService yelp)
+        public ApplicationDbContext _db;
+
+        public HomeController(ILogger<HomeController> logger, YelpService yelp, ApplicationDbContext db)
         {
             _logger = logger;
             _yelp = yelp;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            //string searchlocation = "53005";
-            //string searchtype = "pizza";
-            //var yelpResult = await _yelp.GetBusinesses(searchlocation, searchtype);
-
-            //string yelpId = "R-r0sJ-7ntM9ooj7vTK2eg";
-            //var singleResult = await _yelp.GetBusiness(yelpId);
-            return View();
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var participant = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            //if (participant == null)
+            //{
+            //    return RedirectToAction("Create", "Participants");
+            //}
+            return RedirectToAction("Index", "Chat");
         }
 
         public Task<YelpBusiness> GetBusiness(string businessId)
