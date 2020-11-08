@@ -37,5 +37,9 @@ namespace GroupCapstone.Models
 
         [Column(TypeName = "decimal(11, 8)")]
         public decimal Longitude { get; set; }
+
+        [ForeignKey("Group")]
+        public string GroupId { get; set; }
+        public Group Group { get; set; }
     }
 }
