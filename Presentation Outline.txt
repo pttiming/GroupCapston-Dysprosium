@@ -1,0 +1,27 @@
+Introduction
+	Project Name/Description
+		-Group chat with event searching built in
+	Technologies Used:
+		-ASP.NET Core MVC, Roles, View Models, Services
+		-Entity Framework
+		-APIs: Pusher, Yelp
+
+Registration
+	-Simple process
+	-Stuff going on behind the scenes - storing geocoded address for use in future features
+	
+Groups/Chat (have 2 browsers open with 2 separate accounts)
+	-Create group
+		-Groups populate immediately upon creation
+	-Search/join?
+	-Quick demo of chat - show real-time functionality
+
+Search API
+	-Search for restaurants without leaving the group chat - demo
+	-View details/share to group buttons
+		-Share to group initlaly pops up blank - known issue to fix
+		-Results are shared directly to the group message - no copying and pasting!
+
+Create Events
+	-Events tied to groups
+	-

@@ -139,7 +139,7 @@ $("#APISearchButton").click(function (event) {
                     <th style="width: 200px; text-align: center;">Location</th>
                     <th style="width: 75px; text-align: center;">Rating</th>
                     <th style="width: 75px; text-align: center;">Price</th>
-                    <th style="text-align: center;">Action Buttons</th>
+                    <th></th>
                 </tr>`
             );
 
@@ -149,9 +149,9 @@ $("#APISearchButton").click(function (event) {
                     `<tr style="border-top: 1px solid black; margin-top: 10px">
                         <td>${value.name}</td>
                         <td>${value.location.address1}</td>
-                        <td>${value.rating}</td>
-                        <td>${value.price}</td>
-                        <td>
+                        <td style="text-align: center;">${value.rating}</td>
+                        <td style="text-align: center;">${value.price}</td>
+                        <td style="text-align: center;">
                             <button type="button" class="btn btn-secondary btn-sm"id="ShareToGroup" onclick="shareToGroup('${value.url}')">Share To Group</button>
                             <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#SingleBusinessDetails" onclick="yelpSingleBusiness('${value.id}', event)">View Details</button>
                         </td>

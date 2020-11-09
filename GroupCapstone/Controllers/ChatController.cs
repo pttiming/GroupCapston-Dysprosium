@@ -48,5 +48,11 @@ namespace GroupCapstone.Controllers
             ViewData["Users"] = _userManager.Users;
             return View();
         }
+
+        public IActionResult Create(Event groupChatEvent)
+        {
+
+            return RedirectToAction("Index");
+        }
     }
 }
