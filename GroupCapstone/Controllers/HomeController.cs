@@ -100,7 +100,7 @@ namespace GroupCapstone.Controllers
             return userName;
         }
 
-        public ActionResult JoinGroup(int groupid)
+        public ActionResult JoinGroup(int id)
         {
             UserGroup userGroup = new UserGroup();
             userGroup.GroupId = groupid;
