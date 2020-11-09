@@ -15,13 +15,11 @@ namespace GroupCapstone.Controllers
     public class ChatController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly GroupChatContext _GroupContext;
         public ApplicationDbContext _db;
 
-        public ChatController(UserManager<IdentityUser> userManager, GroupChatContext context, ApplicationDbContext db)
+        public ChatController(UserManager<IdentityUser> userManager, ApplicationDbContext db)
         {
             _userManager = userManager;
-            _GroupContext = context;
             _db = db;
         }
         public IActionResult Index()
@@ -32,9 +30,9 @@ namespace GroupCapstone.Controllers
             {
                 return RedirectToAction("Create", "Participants");
             }
-            var groups = _GroupContext.UserGroup
+            var groups = _db.UserGroup
                 .Where(gp => gp.UserName == _userManager.GetUserName(User))
-                .Join(_GroupContext.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
+                .Join(_db.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
                         new UserGroupViewModel
                         {
                             UserName = ug.UserName,
@@ -54,7 +52,7 @@ namespace GroupCapstone.Controllers
 
         public IActionResult Create(Event groupChatEvent)
         {
-            var group = _GroupContext.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
+            var group = _db.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
             groupChatEvent.Group = group;
             _db.Events.Add(groupChatEvent);
             _db.SaveChanges();

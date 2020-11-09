@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GroupCapstone.Data;
 using GroupCapstone.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace GroupCapstone.Controllers
     [Route("api/[controller]")]
     public class MessageController : Controller
     {
-        private readonly GroupChatContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-        public MessageController(GroupChatContext context, UserManager<IdentityUser> userManager)
+        public MessageController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -14,6 +14,10 @@ namespace GroupCapstone.Data
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Message> Message { get; set; }
+        public DbSet<UserGroup> UserGroup { get; set; }
+        public DbSet<Participant> User { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

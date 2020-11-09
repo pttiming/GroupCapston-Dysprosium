@@ -84,7 +84,28 @@ namespace GroupCapstone.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("GroupCapstone.Models.Message", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("GroupCapstone.Models.Participant", b =>
@@ -136,7 +157,25 @@ namespace GroupCapstone.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Participants");
+                    b.ToTable("Participant");
+                });
+
+            modelBuilder.Entity("GroupCapstone.Models.UserGroup", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserGroup");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -168,8 +207,8 @@ namespace GroupCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8800c272-80d8-4f3b-9b93-259d9778630e",
-                            ConcurrencyStamp = "c29ad715-39f8-4ecd-abc5-74c41d21e879",
+                            Id = "9248911f-0b96-4e7f-88a2-cf533ccd9cfa",
+                            ConcurrencyStamp = "326dc571-3602-4dfd-b813-da949dfbe025",
                             Name = "Participant",
                             NormalizedName = "PARTICIPANT"
                         });

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GroupCapstone.Data;
 using GroupCapstone.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +15,10 @@ namespace GroupCapstone.Controllers
     [Authorize]
     public class GroupController : Controller
     {
-        private readonly GroupChatContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public GroupController(GroupChatContext context, UserManager<IdentityUser> userManager)
+        public GroupController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GroupCapstone.Migrations
 {
-    public partial class Nukeinitial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace GroupCapstone.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Group",
+                name: "Groups",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -56,7 +56,36 @@ namespace GroupCapstone.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Group", x => x.ID);
+                    table.PrimaryKey("PK_Groups", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Message",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AddedBy = table.Column<string>(nullable: true),
+                    message = table.Column<string>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Message", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserGroup",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserGroup", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,15 +218,15 @@ namespace GroupCapstone.Migrations
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Events_Group_GroupId",
+                        name: "FK_Events_Groups_GroupId",
                         column: x => x.GroupId,
-                        principalTable: "Group",
+                        principalTable: "Groups",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Participants",
+                name: "Participant",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -217,15 +246,15 @@ namespace GroupCapstone.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Participants", x => x.Id);
+                    table.PrimaryKey("PK_Participant", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Participants_Events_EventId",
+                        name: "FK_Participant_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Participants_AspNetUsers_IdentityUserId",
+                        name: "FK_Participant_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -235,7 +264,7 @@ namespace GroupCapstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "8800c272-80d8-4f3b-9b93-259d9778630e", "c29ad715-39f8-4ecd-abc5-74c41d21e879", "Participant", "PARTICIPANT" });
+                values: new object[] { "9248911f-0b96-4e7f-88a2-cf533ccd9cfa", "326dc571-3602-4dfd-b813-da949dfbe025", "Participant", "PARTICIPANT" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -282,13 +311,13 @@ namespace GroupCapstone.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Participants_EventId",
-                table: "Participants",
+                name: "IX_Participant_EventId",
+                table: "Participant",
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Participants_IdentityUserId",
-                table: "Participants",
+                name: "IX_Participant_IdentityUserId",
+                table: "Participant",
                 column: "IdentityUserId");
         }
 
@@ -310,7 +339,13 @@ namespace GroupCapstone.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Participants");
+                name: "Message");
+
+            migrationBuilder.DropTable(
+                name: "Participant");
+
+            migrationBuilder.DropTable(
+                name: "UserGroup");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -322,7 +357,7 @@ namespace GroupCapstone.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Group");
+                name: "Groups");
         }
     }
 }

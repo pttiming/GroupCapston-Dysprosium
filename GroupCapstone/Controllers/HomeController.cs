@@ -24,10 +24,10 @@ namespace GroupCapstone.Controllers
 
         public ApplicationDbContext _db;
 
-        public GroupChatContext _context;
+        public ApplicationDbContext _context;
         public UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, YelpService yelp, ApplicationDbContext db, GroupChatContext context, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, YelpService yelp, ApplicationDbContext db, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _yelp = yelp;
@@ -83,13 +83,13 @@ namespace GroupCapstone.Controllers
 
         public List<Group> GetAllGroups()
         {
-            var groups = _context.Groups.ToList();
+            var groups = _db.Groups.ToList();
             return groups;
         }
 
         public List<UserGroup> GetAllUserGroups()
         {
-            var userGroups = _context.UserGroup.ToList();
+            var userGroups = _db.UserGroup.ToList();
             return userGroups;
         }
 
@@ -105,8 +105,8 @@ namespace GroupCapstone.Controllers
             UserGroup userGroup = new UserGroup();
             userGroup.GroupId = groupid;
             userGroup.UserName = GetUserName();
-            _context.UserGroup.Add(userGroup);
-            _context.SaveChanges();
+            _db.UserGroup.Add(userGroup);
+            _db.SaveChanges();
 
             return RedirectToAction(nameof(IndexList));
         }
