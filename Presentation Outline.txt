@@ -1,27 +1,60 @@
+(Person 1)
 Introduction
 	Project Name/Description
-		-Group chat with event searching built in
+		-Group chat with event searching built directly into the app
 	Technologies Used:
-		-ASP.NET Core MVC, Roles, View Models, Services
+		-ASP.NET Core MVC, Roles, ViewModels, Services
 		-Entity Framework
-		-APIs: Pusher, Yelp
+		-JQuery
+		-APIs: Pusher, Yelp, Google
 
-Registration
+-------------------------------------------------------------------------------------------------------------
+
+(Person 2)
+Demo: Registration
 	-Simple process
 	-Stuff going on behind the scenes - storing geocoded address for use in future features
 	
-Groups/Chat (have 2 browsers open with 2 separate accounts)
+Demo: Groups/Chat (have 2 browsers open with 2 separate accounts)
 	-Create group
 		-Groups populate immediately upon creation
 	-Search/join?
 	-Quick demo of chat - show real-time functionality
 
-Search API
+-------------------------------------------------------------------------------------------------------------
+
+(Person 3)
+Demo: API Search Integration
 	-Search for restaurants without leaving the group chat - demo
 	-View details/share to group buttons
 		-Share to group initlaly pops up blank - known issue to fix
 		-Results are shared directly to the group message - no copying and pasting!
 
-Create Events
+Demo: Create/Share/RSVP Events
 	-Events tied to groups
-	-
+	-Demo as much as possible, discuss future feature implementation
+
+-------------------------------------------------------------------------------------------------------------
+
+(Person 4)
+Challenges:
+	-Understanding Pusher as it was given to us (ViewModels, table interaction)
+	-Troubleshooting Pusher - not functional after "out-of-the-box" tutorial (out of date code examples)
+	-Pusher: web sockets, API calls interfering with web sockets - overcame by calling services indirectly via AJAX through Home Controller
+
+Database Organization:
+	-Expanded from what we were given with Pusher (attempt to ensure continued functionality over short sprint timeline)
+	-Individual accounts tied to AspNetUsers
+	-Other functionaltiy mostly centered around groups:
+		-Groups tied back to AspNetUsers (individual accounts)
+		-Messages and events both directly tied to groups, again ensuring continued functionality over short sprint timeline
+
+-------------------------------------------------------------------------------------------------------------
+
+(Person 1)
+Recap:
+	-Group chat w/ event search functionality built in
+	-Future features:
+		-Expand API base to include searches for concerts, beer, wine, adventures, etc.
+		-Expand events -> outings (more than one location per outing, rough timeline for each)
+		-Deeper API functionality (Google Map multiple

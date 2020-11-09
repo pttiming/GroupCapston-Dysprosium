@@ -51,7 +51,9 @@ namespace GroupCapstone.Controllers
 
         public IActionResult Create(Event groupChatEvent)
         {
-
+            // Inject Google Service
+            // Create Service Overload for Event model (essentially a copy of the GetGeoCode(Participant))
+            // Save changes, update database
             return RedirectToAction("Index");
         }
     }
