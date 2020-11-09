@@ -1,4 +1,4 @@
-(Person 1)
+(Person 1) - Brandon
 Introduction
 	Project Name/Description
 		-Group chat with event searching built directly into the app
@@ -10,7 +10,7 @@ Introduction
 
 -------------------------------------------------------------------------------------------------------------
 
-(Person 2)
+(Person 2) - Colin
 Demo: Registration
 	-Simple process
 	-Stuff going on behind the scenes - storing geocoded address for use in future features
@@ -23,7 +23,7 @@ Demo: Groups/Chat (have 2 browsers open with 2 separate accounts)
 
 -------------------------------------------------------------------------------------------------------------
 
-(Person 3)
+(Person 3) - Sean
 Demo: API Search Integration
 	-Search for restaurants without leaving the group chat - demo
 	-View details/share to group buttons
@@ -36,7 +36,7 @@ Demo: Create/Share/RSVP Events
 
 -------------------------------------------------------------------------------------------------------------
 
-(Person 4)
+(Person 4) - Don
 Challenges:
 	-Understanding Pusher as it was given to us (ViewModels, table interaction)
 	-Troubleshooting Pusher - not functional after "out-of-the-box" tutorial (out of date code examples)
@@ -51,7 +51,7 @@ Database Organization:
 
 -------------------------------------------------------------------------------------------------------------
 
-(Person 1)
+(Person 1) - Brandon
 Recap:
 	-Group chat w/ event search functionality built in
 	-Future features:
