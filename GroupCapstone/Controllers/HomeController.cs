@@ -103,7 +103,7 @@ namespace GroupCapstone.Controllers
         public ActionResult JoinGroup(int id)
         {
             UserGroup userGroup = new UserGroup();
-            userGroup.GroupId = groupid;
+            userGroup.GroupId = id;
             userGroup.UserName = GetUserName();
             _db.UserGroup.Add(userGroup);
             _db.SaveChanges();
