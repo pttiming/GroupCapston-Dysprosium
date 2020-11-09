@@ -251,3 +251,37 @@ function shareToGroup(url) {
         });
     }
 }
+
+// Create new group button DevCC Version
+$("#CreateGroupButton").click(function () {
+    let UserNames = $("#CurrentUserName")
+        .map(function () {
+            return $(this).val();
+        }).get();
+    let gn = $("#GroupName").val();
+    let data = {
+        GroupName: $("#GroupName").val(),
+        UserNames: UserNames
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "/api/group",
+        data: JSON.stringify(data),
+        success: (data) => {
+            $('#CreateGroup').modal('hide');
+            $('#MyGroups').append(
+                `<tr>
+                    <td>
+                        ${gn}
+                    </td>
+                    
+                </tr>`
+            );
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
+
+});
+
