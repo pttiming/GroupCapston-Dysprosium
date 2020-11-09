@@ -1,0 +1,79 @@
+﻿@model GroupCapstone.Models.GroupUsersViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>ChatGroups</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                My Groups
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.UserGroups.Join(Model.Groups, i => i.GroupId, g => g.ID, (i, g) => new { i.UserName, g.ID, g.GroupName }).Where(i => i.UserName == Model.UserName))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ID)*@
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr class="table-primary">
+            <th>
+                All Groups
+            </th>
+            <th></th>
+        </trclass="table-primary">
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Groups)
+        {
+            <tr class="table-info">
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ID)*@
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+            @foreach (var item1 in Model.UserGroups.Where(i => i.GroupId == item.ID))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item1.UserName)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item1.ID)*@
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

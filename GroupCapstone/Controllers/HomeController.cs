@@ -12,6 +12,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using System.Security.Claims;
 using GroupCapstone.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace GroupCapstone.Controllers
 {
@@ -23,11 +24,16 @@ namespace GroupCapstone.Controllers
 
         public ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, YelpService yelp, ApplicationDbContext db)
+        public GroupChatContext _context;
+        public UserManager<IdentityUser> _userManager;
+
+        public HomeController(ILogger<HomeController> logger, YelpService yelp, ApplicationDbContext db, GroupChatContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _yelp = yelp;
             _db = db;
+            _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -63,5 +69,36 @@ namespace GroupCapstone.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult IndexList()
+        {
+            GroupUsersViewModel groupUsersViewModel = new GroupUsersViewModel();
+            groupUsersViewModel.Groups = GetAllGroups();
+            groupUsersViewModel.UserGroups = GetAllUserGroups();
+            groupUsersViewModel.UserName = GetUserName();
+            
+            return View(groupUsersViewModel);
+
+        }
+
+        public List<Group> GetAllGroups()
+        {
+            var groups = _context.Groups.ToList();
+            return groups;
+        }
+
+        public List<UserGroup> GetAllUserGroups()
+        {
+            var userGroups = _context.UserGroup.ToList();
+            return userGroups;
+        }
+
+        public string GetUserName()
+        {
+            string userName;
+            userName = this.User.Identity.Name;
+            return userName;
+        }
+
     }
 }

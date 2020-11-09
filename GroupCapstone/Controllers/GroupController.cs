@@ -85,9 +85,6 @@ namespace GroupCapstone.Controllers
             new { newGroup });
             return new ObjectResult(new { status = "success", data = newGroup });
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
     }
 }

@@ -32,5 +32,6 @@ namespace GroupCapstone.Data
             );
         }
         public DbSet<GroupCapstone.Models.UserGroup> UserGroup { get; set; }
+        public DbSet<GroupCapstone.Models.Group> Group { get; set; }
     }
 }
