@@ -42,8 +42,11 @@ namespace GroupCapstone.Controllers
                             GroupName = g.GroupName
                         })
                 .ToList();
+            if (groups.Count == 0)
+            {
+                return RedirectToAction("IndexList", "Home");
+            }
             ViewData["UserGroups"] = groups;
-
             // get all users      
             ViewData["Users"] = _userManager.Users;
             return View();
