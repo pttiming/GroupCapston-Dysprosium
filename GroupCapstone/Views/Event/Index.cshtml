@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId }).Where(u => u.UserName == Model.UserName).Select(s=>s)) {
+@foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId }).Where(u => u.UserName == Model.UserName).Select(s=>s)) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -34,9 +34,7 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }
