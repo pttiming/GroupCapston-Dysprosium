@@ -54,9 +54,11 @@ namespace GroupCapstone.Controllers
 
         public IActionResult Create(Event groupChatEvent)
         {
-            // Inject Google Service
-            // Create Service Overload for Event model (essentially a copy of the GetGeoCode(Participant))
-            // Save changes, update database
+            var group = _GroupContext.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
+            groupChatEvent.Group = group;
+            _db.Events.Add(groupChatEvent);
+            _db.SaveChanges();
+            // Investigate Error
             return RedirectToAction("Index");
         }
     }

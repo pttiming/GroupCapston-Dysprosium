@@ -58,7 +58,7 @@
                 Find a Group to Join
             </th>
             <th></th>
-            </trclass="table-primary">
+            </tr">
     </thead>
     <tbody>
         @foreach (var item in Model.Groups)
@@ -71,23 +71,19 @@
                     @*@Html.DisplayFor(modelItem => item.ID)*@
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-action="JoinGroup" asp-route-id="@item.ID">Join This Group</a> |
                 </td>
             </tr>
-            @foreach (var item1 in Model.UserGroups.Where(i => i.GroupId == item.ID))
-            {
-                <tr>
+            <tr>
+                @foreach (var item1 in Model.UserGroups.Where(i => i.GroupId == item.ID))
+                {
                     <td>
                         @Html.DisplayFor(modelItem => item1.UserName)
                     </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item1.ID)*@
-                    </td>
-                </tr>
+
             }
-        }
+            </tr>
+            }
     </tbody>
 </table>
 

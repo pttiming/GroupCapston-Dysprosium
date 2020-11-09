@@ -139,18 +139,20 @@
                             <label for="EndDate">End Date/Time</label>
                             <input type="datetime-local" class="form-control" name="EndDate" id="EndDate" aria-describedby="emailHelp">
                         </div>
-                        <label for="User">Add Event to Group:<br></label> <br>
-                        <div class="row">
-                            <!-- List users here -->
-                            @foreach (var group in (dynamic)ViewData["UserGroups"])
-                            {
-                                <div class="col-4">
-                                    <div class="form-check">
-                                        <input type="radio" value="@group.GroupName" name="UserName[]">
-                                        <label class="form-check-label" for="Users">@group.GroupName</label>
+                        <div class="form-group">
+                            <label for="GroupId">Add Event to Group:<br></label> <br>
+                            <div class="row">
+                                <!-- List groups here -->
+                                @foreach (var group in (dynamic)ViewData["UserGroups"])
+                                {
+                                    <div class="col-4">
+                                        <div class="form-check">
+                                            <input type="radio" name="GroupId" id="GroupId" value="@group.GroupId" />
+                                            <label for="GroupId" class="form-check-label">@group.GroupName</label>
+                                        </div>
                                     </div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="Address1">Address</label>

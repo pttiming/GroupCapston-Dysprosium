@@ -100,5 +100,16 @@ namespace GroupCapstone.Controllers
             return userName;
         }
 
+        public ActionResult JoinGroup(int groupid)
+        {
+            UserGroup userGroup = new UserGroup();
+            userGroup.GroupId = groupid;
+            userGroup.UserName = GetUserName();
+            _context.UserGroup.Add(userGroup);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(IndexList));
+        }
+
     }
 }
