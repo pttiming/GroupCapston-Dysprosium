@@ -28,15 +28,15 @@ namespace GroupCapstone.Controllers
         {
 
             var groups = _context.UserGroup
-                          .Where(gp => gp.UserName == _userManager.GetUserName(User))
-                          .Join(_context.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
-                                         new UserGroupViewModel()
-                                        {
-                                            UserName = ug.UserName,
-                                            GroupId = g.ID,
-                                            GroupName = g.GroupName
-                                        })
-                           .ToList();
+            .Where(gp => gp.UserName == _userManager.GetUserName(User))
+            .Join(_context.Groups, ug => ug.GroupId, g => g.ID, (ug, g) =>
+                            new UserGroupViewModel()
+                        {
+                            UserName = ug.UserName,
+                            GroupId = g.ID,
+                            GroupName = g.GroupName
+                        })
+            .ToList();
 
             return groups;
         }

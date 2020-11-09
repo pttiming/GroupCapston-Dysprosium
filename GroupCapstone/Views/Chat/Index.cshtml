@@ -111,6 +111,75 @@
         </div>
     </div>
 
+    <!-- New Event Modal -->
+    <div class="modal fade" id="CreateNewEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Create New Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="CreateEventForm" asp-action="Create">
+                        <div class="form-group">
+                            <label for="Name">Group Name</label>
+                            <input type="text" class="form-control" name="Name" id="Name" aria-describedby="emailHelp" placeholder="Event Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Description (optional)</label>
+                            <input type="text" class="form-control" name="Description" id="Description" aria-describedby="emailHelp" placeholder="Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="StartDate">Start Date/Time</label>
+                            <input type="datetime-local" class="form-control" name="StartDate" id="StartDate" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="EndDate">End Date/Time</label>
+                            <input type="datetime-local" class="form-control" name="EndDate" id="EndDate" aria-describedby="emailHelp">
+                        </div>
+                        <label for="User">Add Event to Group:<br></label> <br>
+                        <div class="row">
+                            <!-- List users here -->
+                            @foreach (var group in (dynamic)ViewData["UserGroups"])
+                            {
+                                <div class="col-4">
+                                    <div class="form-check">
+                                        <input type="radio" value="@group.GroupName" name="UserName[]">
+                                        <label class="form-check-label" for="Users">@group.GroupName</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label for="Address1">Address</label>
+                            <input type="text" class="form-control" name="Address1" id="Address1" aria-describedby="emailHelp" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="City">City</label>
+                            <input type="text" class="form-control" name="City" id="City" aria-describedby="emailHelp" placeholder="City">
+                        </div>
+                        <div class="form-group">
+                            <label for="State">State</label>
+                            <input type="text" class="form-control" name="State" id="State" aria-describedby="emailHelp" placeholder="State">
+                        </div>
+                        <div class="form-group">
+                            <label for="Zip">Zip Code</label>
+                            <input type="text" class="form-control" name="Zip" id="Zip" aria-describedby="emailHelp" placeholder="Zip">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="CreateNewGroupButton" value="Create">Create Event</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Business Details Modal -->
     <div class="modal fade" id="SingleBusinessDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
