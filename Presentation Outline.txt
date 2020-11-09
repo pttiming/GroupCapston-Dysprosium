@@ -57,4 +57,5 @@ Recap:
 	-Future features:
 		-Expand API base to include searches for concerts, beer, wine, adventures, etc.
 		-Expand events -> outings (more than one location per outing, rough timeline for each)
-		-Deeper API functionality (Google Map multiple
+		-Deeper API functionality (Google Map w/ pins for each location in outing)
+	-Questions?
