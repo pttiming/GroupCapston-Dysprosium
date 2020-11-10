@@ -15,11 +15,13 @@
             <th>
                 Events
             </th>
-            <th></th>
+            <th>
+                Start
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId }).Where(u => u.UserName == Model.UserName).Select(s => s))
+        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName).Select(s => s))
         {
             <tr>
                 <td>
@@ -35,48 +37,34 @@
                     @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.Id">View Details</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mapsModal" data-lat="@item.Latitude" data-lng="@item.Longitude">View Details</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Address1, u.City, u.State, u.ZipCode, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName).Select(s => s))
-{
-    <!--Load modal for each event-->
-    <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLongTitle">@item.Name</h3>
+<!--Map modal-->
+<div class="modal fade mapsModal" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLongTitle">Map</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 modal_body_map">
+                        <div class="location-map" id="location-map">
+                            <div style="width: 600px; height: 400px;" id="map_canvas"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td>Start:</td>
-                            <td>@item.StartDate</td>
-                        </tr>
-                        <tr>
-                            <td>End:</td>
-                            <td>@item.EndDate</td>
-                        </tr>
-                        <tr>
-                            <td>Address:</td>
-                            <td>@item.Address1<br />@item.City, @item.State  @item.ZipCode</td>
-                        </tr>
-                        <tr>
-                            <td>Attendees:</td>
-                        </tr>
-                    </table>
-                    <!--Insert Google Map-->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
     </div>
-}
+</div>
