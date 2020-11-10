@@ -9,6 +9,8 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<h4>Events I've RSVP'd To</h4>
 <table class="table">
     <thead>
         <tr>
@@ -21,34 +23,77 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName).Select(s => s))
+        @foreach (var item in Model.Events.Join(Model.UserGroups, e => e.GroupId, ug => ug.GroupId, (e, ug) => new { e, ug }).Join(Model.EventParticipants, e2 => e2.e.Id, ep => ep.EventId, (e2, ep) => new { e2, ep }).Join(Model.Participants, ep2 => ep2.ep.ParticipantId, p => p.Id, (ep2, p) => new { ep2, p }).Where(a => a.p.IdentityUserId == Model.UserId).Select(e => new { Id = e.ep2.e2.e.Id, Name = e.ep2.e2.e.Name, StartDate = e.ep2.e2.e.StartDate, GroupName = e.ep2.e2.e.Group.GroupName, Latitude = e.ep2.e2.e.Latitude, Longitude = e.ep2.e2.e.Longitude, UserName = e.ep2.e2.ug.UserName }))
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GroupId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.Id">View Event Details</button>
-            </td>
-            <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mapsModal" data-lat="@item.Latitude" data-lng="@item.Longitude">View Map</button>
-            </td>
-            <td>
-                <a class="btn btn-primary" asp-action="AttendEvent" asp-route-id="@item.Id">Count Me In!</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.Id">View Event Details</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mapsModal" data-lat="@item.Latitude" data-lng="@item.Longitude">View Map</button>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="LeaveEvent" asp-route-id="@item.Id">De-Commit from Event</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<h4>All Events for My Groups</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Events
+            </th>
+            <th>
+                Start
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.Id">View Event Details</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mapsModal" data-lat="@item.Latitude" data-lng="@item.Longitude">View Map</button>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="AttendEvent" asp-route-id="@item.Id">Count Me In!</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
 
 @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Address1, u.City, u.State }).Where(u => u.UserName == Model.UserName).Select(s => s))
 {
@@ -75,8 +120,14 @@
                         </tr>
                         <tr>
                             <td>Attendees:</td>
+                            @foreach (var person in Model.EventParticipants.Where(ep => ep.EventId == item.Id).Join(Model.Participants, ep => ep.ParticipantId, p => p.Id, (ep, p) => new { p.FirstName, p.LastName }))
+                            {
+                                <td>@person.FirstName @person.LastName</td>
+                            };
+
                         </tr>
                     </table>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -112,3 +163,4 @@
         </div>
     </div>
 </div>
+

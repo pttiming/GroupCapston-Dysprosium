@@ -16,5 +16,12 @@ namespace GroupCapstone.Models
         public IEnumerable<Event> Events { get; set; }
 
         public IEnumerable<EventParticipants> EventParticipants { get; set; }
+
+        public IEnumerable<Participant> Participants { get; set; }
+
+        public string UserId { get; set; }
+
+        public int participantId { get; set; }
+        public IEnumerable<Event> Filtered { get; set; }
     }
 }

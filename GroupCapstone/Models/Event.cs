@@ -22,8 +22,6 @@ namespace GroupCapstone.Models
 
         public DateTime EndDate { get; set; }
 
-        public List<Participant> Attendees { get; set; }
-
         [Display(Name = "Address")]
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -44,10 +42,6 @@ namespace GroupCapstone.Models
         public int GroupId { get; set; }
         public Group Group { get; set; }
 
-        public Event()
-        {
-            Attendees = new List<Participant>();
-        }
     }
 
 }

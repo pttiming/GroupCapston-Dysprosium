@@ -128,7 +128,9 @@ $("#APISearchButton").click(function (event) {
         type: 'GET',
         dataType: 'json',
         success: function (data, textStatus, jQqhr) {
-
+            if (data.price == null) {
+                data.price == ""
+            };
             // Clear results table
             $("#apiResults").empty();
 
@@ -174,6 +176,9 @@ function yelpSingleBusiness(businessId, event) {
         type: 'GET',
         dataType: 'json',
         success: function (data, textStatus, jQqhr) {
+            if (data.price == null) {
+                data.price == ""
+            };
             console.log(data);
             $("#SingleBusinessDetails .modal-dialog .modal-content .modal-header .modal-title").html(
                 `${data.name}`
@@ -241,7 +246,7 @@ function shareToGroup(url) {
             }),
             success: (data) => {
                 $(".chat_body").append(`<div class="row chat_message float-right"><b>`
-                    + data.data.addedBy + `: </b>` + $("#Message").val() + `</div>`
+                    + data.data.addedBy + `<a href="${url}">Check out this restaurant I found on Yelp!</a>`
                 );
 
                 $("#Message").val('');
@@ -325,3 +330,38 @@ $(document).ready(function () {
         map.setCenter(myLatlng);
     });
 });
+
+//function shareEventToGroup() {
+//    var dict = {
+//        Name: document.forms.CreateEventForm["Name"].value,
+//        StartDate: document.forms.CreateEventForm["StartDate"].value,
+//        GroupId: document.forms.CreateEventForm["GroupId"].value,
+//        Description: document.forms.CreateEventForm["Description"].value
+//    };
+//    if (currentGroupId == null) {
+//        alert("Please select a Group to send the message to!")
+//    }
+//    else {
+//        $.ajax({
+//            type: "POST",
+//            url: "/api/message",
+//            data: JSON.stringify({
+//                AddedBy: $("#UserName").val(),
+//                GroupId: intParse(document.forms.CreateEventForm["GroupId"].value),//$("#currentGroup").val(),
+//                message: `<a href="${url}">Check out this restaurant I found on Yelp!</a>`,
+//                SocketId: pusher.connection.socket_id
+//            }),
+//            success: (data) => {
+//                $(".chat_body").append(`<div class="row chat_message float-right"><b>`
+//                    + data.data.addedBy + `: <a href="${url}">I Created an Event, check it out!</a>`
+//                );
+
+//                $("#Message").val('');
+//            },
+//            dataType: 'json',
+//            contentType: 'application/json'
+//        });
+//    }
+//}
+
+//$("#CreateNewEventButton").on("click", shareEventToGroup());
