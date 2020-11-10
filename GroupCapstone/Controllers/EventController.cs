@@ -75,10 +75,11 @@ namespace GroupCapstone.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var participant = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
-            var eventToAttend = _db.Events.Where(e => e.Id == id).SingleOrDefault();
+            EventParticipants ep = new EventParticipants();
+            ep.EventId = id;
+            ep.ParticipantId = participant.Id;
 
-            eventToAttend.Attendees.Add(participant);
-            _db.Update(eventToAttend);
+            _db.Add(ep);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

@@ -14,5 +14,7 @@ namespace GroupCapstone.Models
         public string UserName { get; set; }
 
         public IEnumerable<Event> Events { get; set; }
+
+        public IEnumerable<EventParticipants> EventParticipants { get; set; }
     }
 }
