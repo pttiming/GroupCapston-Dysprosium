@@ -31,7 +31,7 @@
                                 <a class="nav-link dropdown-toggle text-dark" id="navdrop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" data-toggle="modal" data-target="#CreateNewEvent">Create New</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Events" asp-action="Details">View All</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Event" asp-action="Index">View All</a>
                                 </div>
                             </li>
                         }
@@ -55,6 +55,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=@API_KEYS.googleMapsApi&callback=initMap"></script></script>
     <script src="~/js/key.js" asp-append-version="true"></script>
     <script>
         setKeys("@API_KEYS.pusherAppKey");

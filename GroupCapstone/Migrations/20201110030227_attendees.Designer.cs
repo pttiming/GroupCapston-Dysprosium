@@ -4,14 +4,16 @@ using GroupCapstone.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GroupCapstone.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201110030227_attendees")]
+    partial class attendees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,24 +72,6 @@ namespace GroupCapstone.Migrations
                     b.HasIndex("GroupId");
 
                     b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("GroupCapstone.Models.EventParticipants", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ParticipantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EventParticipants");
                 });
 
             modelBuilder.Entity("GroupCapstone.Models.Group", b =>
@@ -225,8 +209,8 @@ namespace GroupCapstone.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4de6771d-b471-496b-83c5-4363ec83cc30",
-                            ConcurrencyStamp = "beea1c34-79eb-4f15-931b-c8385eba8f56",
+                            Id = "6f283d5a-d2b0-41d4-a3fd-0b9654423692",
+                            ConcurrencyStamp = "6e61d233-e126-4dee-9cf9-382bebbc8ce9",
                             Name = "Participant",
                             NormalizedName = "PARTICIPANT"
                         });

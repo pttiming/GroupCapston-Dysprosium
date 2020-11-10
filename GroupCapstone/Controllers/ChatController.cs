@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using GroupCapstone.Data;
 using GroupCapstone.Models;
+using GroupCapstone.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,13 @@ namespace GroupCapstone.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         public ApplicationDbContext _db;
+        public GoogleService _google;
 
-        public ChatController(UserManager<IdentityUser> userManager, ApplicationDbContext db)
+        public ChatController(UserManager<IdentityUser> userManager, ApplicationDbContext db, GoogleService google)
         {
             _userManager = userManager;
             _db = db;
+            _google = google;
         }
         public IActionResult Index()
         {
@@ -50,13 +53,12 @@ namespace GroupCapstone.Controllers
             return View();
         }
 
-        public IActionResult Create(Event groupChatEvent)
+        public async Task<IActionResult> Create(Event groupChatEvent)
         {
-            var group = _db.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
-            groupChatEvent.Group = group;
+            groupChatEvent = await _google.GetGeoCode(groupChatEvent);
+            groupChatEvent.Group = _db.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
             _db.Events.Add(groupChatEvent);
             _db.SaveChanges();
-            // Investigate Error
             return RedirectToAction("Index");
         }
     }

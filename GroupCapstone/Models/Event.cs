@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GroupCapstone.Controllers;
+using GroupCapstone.Migrations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,7 +22,7 @@ namespace GroupCapstone.Models
 
         public DateTime EndDate { get; set; }
 
-        public Participant[] Attendees { get; set; }
+        public List<Participant> Attendees { get; set; }
 
         [Display(Name = "Address")]
         public string Address1 { get; set; }
@@ -41,5 +43,11 @@ namespace GroupCapstone.Models
         [ForeignKey("Group")]
         public int GroupId { get; set; }
         public Group Group { get; set; }
+
+        public Event()
+        {
+            Attendees = new List<Participant>();
+        }
     }
+
 }
