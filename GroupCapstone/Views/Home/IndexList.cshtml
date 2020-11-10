@@ -6,9 +6,6 @@
 
 <h2>ChatGroups</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table" id="MyGroups">
     <thead>
         <tr class="table-primary">
@@ -44,7 +41,7 @@
         {
             <tr>
                 <td>
-                    <h4>Please Create a GroupChat or Join an Exisiting GroupChat Below to Continue</h4>
+                    <h4>Please Create a GroupChat or Join an Existing GroupChat Below to Continue</h4>
                 </td>
             </tr>
         }
@@ -58,7 +55,7 @@
                 Find a Group to Join
             </th>
             <th></th>
-            </tr">
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Groups)
@@ -114,4 +111,3 @@
         </div>
     </div>
 </div>
-
