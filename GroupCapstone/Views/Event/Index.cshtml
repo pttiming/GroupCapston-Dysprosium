@@ -4,11 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Upcoming Events!</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <h4>Events I've RSVP'd To</h4>
 <table class="table">
@@ -23,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events.Join(Model.UserGroups, e => e.GroupId, ug => ug.GroupId, (e, ug) => new { e, ug }).Join(Model.EventParticipants, e2 => e2.e.Id, ep => ep.EventId, (e2, ep) => new { e2, ep }).Join(Model.Participants, ep2 => ep2.ep.ParticipantId, p => p.Id, (ep2, p) => new { ep2, p }).Where(a => a.p.IdentityUserId == Model.UserId).Select(e => new { Id = e.ep2.e2.e.Id, Name = e.ep2.e2.e.Name, StartDate = e.ep2.e2.e.StartDate, GroupName = e.ep2.e2.e.Group.GroupName, Latitude = e.ep2.e2.e.Latitude, Longitude = e.ep2.e2.e.Longitude, UserName = e.ep2.e2.ug.UserName }))
+        @foreach (var item in Model.Events.Join(Model.UserGroups, e => e.GroupId, ug => ug.GroupId, (e, ug) => new { e, ug }).Join(Model.EventParticipants, e2 => e2.e.Id, ep => ep.EventId, (e2, ep) => new { e2, ep }).Join(Model.Participants, ep2 => ep2.ep.ParticipantId, p => p.Id, (ep2, p) => new { ep2, p }).Where(a => a.p.IdentityUserId == Model.UserId).Select(e => new { Id = e.ep2.e2.e.Id, Name = e.ep2.e2.e.Name, StartDate = e.ep2.e2.e.StartDate, GroupName = e.ep2.e2.e.Group.GroupName, Latitude = e.ep2.e2.e.Latitude, Longitude = e.ep2.e2.e.Longitude, UserName = e.ep2.e2.ug.UserName }).Where(c=>c.UserName == Model.UserName))
         {
             <tr>
                 <td>

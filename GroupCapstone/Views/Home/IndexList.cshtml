@@ -15,6 +15,7 @@
             <th>
                 <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#CreateGroup">Add Group</button>
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -55,6 +56,10 @@
                 Find a Group to Join
             </th>
             <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -64,11 +69,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.GroupName)
                 </td>
+                <td></td>
+                <td></td>
                 <td>
                     @*@Html.DisplayFor(modelItem => item.ID)*@
                 </td>
+                <td></td>
                 <td>
-                    <a asp-action="JoinGroup" asp-route-id="@item.ID">Join This Group</a> |
+                    <a asp-action="JoinGroup" asp-route-id="@item.ID">Join This Group</a>
                 </td>
             </tr>
             <tr>
