@@ -59,7 +59,6 @@ namespace GroupCapstone.Controllers
             groupChatEvent.Group = _db.Groups.Where(g => g.ID == groupChatEvent.GroupId).SingleOrDefault();
             _db.Events.Add(groupChatEvent);
             _db.SaveChanges();
-            // Investigate Error
             return RedirectToAction("Index");
         }
     }
