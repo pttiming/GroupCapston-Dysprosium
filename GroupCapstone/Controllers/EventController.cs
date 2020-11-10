@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using GroupCapstone.Data;
 using GroupCapstone.Models;
@@ -68,6 +69,18 @@ namespace GroupCapstone.Controllers
             string userName;
             userName = this.User.Identity.Name;
             return userName;
+        }
+
+        public IActionResult AttendEvent(int id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var participant = _db.Participants.Where(e => e.IdentityUserId == userId).SingleOrDefault();
+            var eventToAttend = _db.Events.Where(e => e.Id == id).SingleOrDefault();
+
+            eventToAttend.Attendees.Add(participant);
+            _db.Update(eventToAttend);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
     }
 

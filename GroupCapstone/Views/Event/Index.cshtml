@@ -19,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId }).Where(u => u.UserName == Model.UserName).Select(s => s))
+        @foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Group, u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId }).Where(u => u.UserName == Model.UserName).Select(s => s))
         {
             <tr>
                 <td>
@@ -29,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GroupId)
+                    @Html.DisplayFor(modelItem => item.Group.GroupName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
@@ -37,12 +37,15 @@
                 <td>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.Id">View Details</button>
                 </td>
+                <td>
+                    <a asp-action="AttendEvent" asp-route-id="@item.Id">Count Me In!</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
-@foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Address1, u.City, u.State, u.ZipCode, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName).Select(s => s))
+@foreach (var item in Model.Events.Join(Model.UserGroups, u => u.GroupId, ug => ug.GroupId, (u, ug) => new { u.Id, u.Attendees, u.Description, ug.UserName, u.Name, u.StartDate, u.EndDate, ug.GroupId, u.Address1, u.City, u.State, u.ZipCode, u.Latitude, u.Longitude }).Where(u => u.UserName == Model.UserName).Select(s => s))
 {
     <!--Load modal for each event-->
     <div class="modal fade" id="@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -67,6 +70,11 @@
                         </tr>
                         <tr>
                             <td>Attendees:</td>
+                            @foreach (var person in item.Attendees)
+                            {
+                                <td>@person.FirstName @person.LastName </td>
+                            }
+                            <td>@item.Attendees[0].FirstName </td>
                         </tr>
                     </table>
                     <!--Insert Google Map-->
